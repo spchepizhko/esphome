@@ -26,8 +26,8 @@ static void IRAM_ATTR electro_isr_handler() // обработчик прерыв
     valdes[0]=0;
     valdes[1]=valdes[1]+1; //sensors_param.cfgdes[2]+1;
   }
-  sensors_param.cfgdes[1]=valdes[0];
-  sensors_param.cfgdes[2]=valdes[1];
+  //sensors_param.cfgdes[1]=valdes[0];
+  //sensors_param.cfgdes[2]=valdes[1];
   push=1;
   //vTaskDelay( portTICK_PERIOD_MS);
   //SAVEOPT
@@ -36,7 +36,7 @@ static void IRAM_ATTR electro_isr_handler() // обработчик прерыв
 static void IRAM_ATTR gaz_isr_handler() // обработчик прерывания поворотного диска
 {
   valdes[2]=valdes[2]+1; //sensors_param.cfgdes[3]+1;
-  sensors_param.cfgdes[3]=valdes[2];
+  //sensors_param.cfgdes[3]=valdes[2];
   //SAVEOPT
   push=1;
   //vTaskDelay( portTICK_PERIOD_MS);
@@ -88,7 +88,7 @@ void timerfunc(uint32_t  timersrc) {  // выполнение кода кажд�
     push=0;
     if(valdes[4]==1) 
     {
-      SAVEOPT
+      ;//SAVEOPT
     }
   }
 
@@ -120,8 +120,8 @@ void webfunc(char *pbuf) { // вывод данных на главной мод
   //LCD_print(2,data);
   os_sprintf(HTTPBUFF,"</div><div class=blockk>");
   os_sprintf(HTTPBUFF,"CntLoop: %d<br>",sensors_param.cfgdes[0]);
-  os_sprintf(HTTPBUFF,"TicEl: %d<br>",sensors_param.cfgdes[1]);
-  os_sprintf(HTTPBUFF,"CntEl: %d<br>",sensors_param.cfgdes[2]);
-  os_sprintf(HTTPBUFF,"CntGaz: %d<br>",sensors_param.cfgdes[3]);
+  os_sprintf(HTTPBUFF,"TicEl: %d<br>",valdes[0]);
+  os_sprintf(HTTPBUFF,"CntEl: %d<br>",valdes[1]);
+  os_sprintf(HTTPBUFF,"CntGaz: %d<br>",valdes[2]);
   os_sprintf(HTTPBUFF,"Init: %d<br>",valdes[4]);
 }
